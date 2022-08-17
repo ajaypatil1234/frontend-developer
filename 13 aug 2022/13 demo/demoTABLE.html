@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>table</title>
+</head>
+<style>
+    td{text-align: center;}
+</style>
+<body>
+    <center><caption><i>the text rowspan table</i></caption></center>
+    <center><table border="1"></center>
+        <tr>
+            <th rowspan="3">day</th>
+            <th colspan="4">seminar</th>
+        </tr>
+        <tr>
+            <th colspan="2">schedul</th>
+            <th colspan="2" rowspan="2">topic</th>
+        </tr>
+        <tr>
+            <th colspan="1">begin</th>
+            <th>end</th>
+        </tr>
+        <tr>
+            <td rowspan="2">monday</td>
+            <td rowspan="2">8.00am</td>
+            <td rowspan="2">5.00pm</td>
+            <td colspan="2">indruction on xml</td>
+        </tr>
+        <tr>
+            <td colspan="2">validity dto and relax ng</td>
+        </tr>
+        <tr>
+            <td rowspan="2">thusday</td>
+            <td>8.00am</td>
+            <td>12.00am</td>
+            <td colspan="2" rowspan="2">xpath</td>
+        </tr>
+        <tr>
+            <td>11.00.am</td>
+            <td>2.00am</td>
+        </tr>
+        <tr>
+            <td rowspan="2">wedsnday</td>
+            <td>2.00.am</td>
+            <td>5.00am</td>
+            <td colspan="2">xsl transformation</td>
+        </tr>
+        <tr>
+            <td>5.00.am</td>
+            <td>12.00am</td>
+            <td colspan="2">xsl formating text</td>
+        </tr>
+    </table>
+</body>
+</html>
