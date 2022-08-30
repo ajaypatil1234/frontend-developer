@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <title>hello word</title>
+    </head>
+    <style>
+        table{
+            text-align: center;
+        }
+    </style>
+    <body>
+       <center><caption><i>a test with merged cell</i></caption></center>
+        <!-- rowspan used for merge/joint a row -->
+        <!-- colspan used for used with a column -->
+        <!-- both attribute used with <td> or <th> tag -->
+            <!-- when used rowspan to join row then from next row remove 1 column -->
+            <!-- when used colspan to join then remove 1 column in that row  -->
+            <!-- <center><i>test table with merge cell</i></center> -->
+           <center><table border="1"width="50%" height="40%"></center>
+            <tr>
+                <th rowspan="2"></th>
+                <th colspan="2">average</th>
+                <th rowspan="2">red eyes</th>
+            </tr>
+            <tr>
+                <th>height</th>
+                <th>width</th>
+                
+            </tr>
+            <tr>
+                <td>male</td>
+                <td>1.9</td>
+                <td>0.003</td>
+                <td>40%</td>
+            </tr>
+            <tr>
+                <td>female</td>
+                <td>2.6</td>
+                <td>0.009</td>
+                <td>60%</td>
+            </tr>
+           </table>
+    </body>
+</html>
