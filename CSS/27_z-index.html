@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img{
+            height: 150px;
+            width: 150px;
+            border: 4px solid black;
+            position: relative;
+        }
+        .image1{
+            position: absolute;
+            top:0px ;
+            left: 0px;
+            z-index: 1;
+            
+        }
+        .image2{
+            position: absolute;
+            top: 75px;
+            left: 75px;
+            z-index: 2;
+        }
+        .image3{
+            position: absolute;
+            top: 150px;
+            left: 150px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="image1">
+            <img src="iMAGEposition/im1.jpeg" alt="">
+        </div>
+        <div class="image2">
+            <img src="iMAGEposition/im2.jpg" alt="">
+        </div>
+        <div class="image3">
+            <img src="iMAGEposition/im3.jpg" alt="">
+        </div>
+    </div>
+</body>
+</html>
