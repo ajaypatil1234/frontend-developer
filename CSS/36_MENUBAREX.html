@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        header{
+            background-color: mediumaquamarine;
+            height: 100px;
+            width: 100%;
+        }
+        .container{
+                display: flex;
+        }
+        .container .logo {
+            width: 20%;
+            text-align: center;
+            padding: 20px;
+        }
+        .container .logo span {
+            font-size: 40px;
+            width: 50px;
+        }
+        .container .logo a {
+            font-size: 30px;
+            color: black;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .container .nav {
+            width: 60%;
+            margin-top: 30px;
+        }
+        .container .nav a {
+             text-decoration: none;
+             font-size: 30px;
+             padding: 20px;
+             text-align: center;
+        }
+        .container .nav a :hover{
+            color: blue;
+        }
+        .container .search {
+            width: 20%;
+            margin-top: 30px;
+        }
+        .container .search input[type="search"] {
+            height: 30px;
+             width: 100px;
+             border-radius:10px ;
+             padding: 10px;
+               }
+               .container .search button{
+                background-color: orangered;
+                color: white;
+               }
+               .container .search span {
+                width: 20px;
+               }
+    </style>
+</head>
+<body>
+    <header>
+    <div class="container">
+        <div class="logo">
+            <span class="fa-solid fa-city"></span>
+             <a href=""> Estates </a>
+        </div>
+        <div class="nav">
+                <a href="">home</a>
+                <a href="">about</a>
+                <a href="">service</a>
+                <a href="">pages</a>
+                <a href="">contact</a>
+        </div>
+        <div class="search">
+         <input type="search" name="" id="" placeholder="search....">
+         <span class="fa-solid fa-magnifying-glass"></span>
+          <button>Enquire Here</button>
+          <span class="fa-solid fa-moon"></span>
+        </div>
+    </div>
+</header>
+</body>
+</html>
