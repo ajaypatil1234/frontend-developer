@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  /> 
+   <!-- justify-content :- space-beetwen, space-around , space-endly -->
+   <!-- word space :- px -->
+  <style>
+    *{
+        padding: 0px;
+        margin: 0px;    
+    }
+    .header{
+        height: 70px;
+        width: 100%;
+    }
+    .container {
+        padding: 20px;
+        display: flex;
+        background-color: antiquewhite;
+    }
+    .container .logo{
+        width: 20%;
+        font-size: 30px;
+    }
+    .container .logo a{
+        font-size: 30px;
+        text-decoration: none;
+        padding: 10px;
+    }
+    .container .nav {
+        width: 60%;
+        justify-content:space-around;
+        display: flex;
+    }
+    .container .nav a{  
+        text-decoration: none;
+        align-items: center;
+        padding: 20px;
+        font-size: 20px;
+            }
+    .container .search {  
+        width: 20%;
+        display: flex;
+        padding: 20px;  
+        justify-content: space-between;
+    }
+    .container .search input[type="search"] {
+        height: 30px;
+        width: 100px;
+        border-radius: 15px;
+        border: none;
+    }
+    .container .search button {
+        height: 40px;
+        width: 100px;
+        border: none;
+        border-radius: 10px;
+        background-color: orangered;
+        color: white;
+        font-weight: bold;
+    }
+    .container .search span{
+        font-size: 20px;
+        padding: 10px;
+    }
+
+  </style>
+</head> 
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <span class="fa-solid fa-building"></span>
+                <a href="">Estates</a>
+            </div>
+            <div class="nav">
+                    <a href="">home</a>
+                    <a href="">about</a>
+                    <a href="">Services</a>
+                    <a href="">pages</a>
+                    <a href="">contact</a>
+            </div>
+            <div class="search">
+                    <input type="search" name="" id=""placeholder="search....">
+                    <span class="fa-solid fa-magnifying-glass"></span>
+                    <button type="submit">Enquire Here</button>
+                    <span class="fa-solid fa-moon"></span>
+            </div>
+        </div>
+    </header>
+</body>
+</html>
