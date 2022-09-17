@@ -7,6 +7,7 @@ header{
   height: 70px;
   background-color: rgb(22, 221, 155);
   margin-top: 10px;
+  position: relative;
   
 }
 header .back-cover{
@@ -14,7 +15,8 @@ header .back-cover{
    height: 650px;
    width: 100%;
    background-size: cover;
-   background-repeat:no-repeat  ;
+   /* background-repeat:no-repeat; */
+  
 }
 header .back-cover {
    width: 100%;
@@ -22,16 +24,20 @@ header .back-cover {
 }
 header .back-cover .logo {
   width: 30%;
+ margin-right: 20px;
  
 }
 header .back-cover .logo a{
   text-decoration: none;
   font-size: 30px;
-  color: black;
+  color: blue;
   margin-left:0px;
   font-weight: bold;
  margin-top: 20px;
  
+}
+header .back-cover .logo a:hover{
+   color: orangered;
 }
 header .back-cover .logo span{
   padding: 20px;
@@ -39,25 +45,63 @@ header .back-cover .logo span{
   margin-left: 70px;
 }
 header .back-cover .nav{
-  width: 50%;
+  width: 40%;
   margin-top: 30px;
+  margin-left: 40px;
 }
 header .back-cover .nav a{
    text-decoration: none;
-   font-size: 20px;
+    font-size: 20px;
    padding: 20px;
   color: black;  
-  text-shadow: 5px 5px 5px;
+  text-shadow: 5px 5px 5px white;
 }
 header .back-cover .nav a:hover {
      color: blue;
 }
  header .back-cover .search {
    width: 30%;
-   margin-top: 30px;
+   margin-top: 20px;
  }
 
 header .back-cover .search span{
    padding: 10px;
    font-size: 20px;
+}
+header .image-text {
+  position: absolute;
+  width: 100%;
+  padding: 30px;
+  top: 200px;
+  color: white;
+ text-align: center;
+}
+header .image-text h1{
+  font-size: 0.6in;
+  text-transform: uppercase;
+  text-shadow: 15px 5px 5px black;
+  text-align: center;
+  font-weight: 600;
+}
+header .image-text p{
+  font-size: 15px;
+  text-transform:  capitalize;
+  color:  whitesmoke;
+  text-shadow: 5px 5px 5px gray;
+}
+header .image-text button {
+   padding: 10px;
+   background-color: orangered ;
+   color: white;
+   border-radius: 15px;
+   height: 50px;
+   width: 150px;
+   text-transform: capitalize;
+   font-size: medium;
+}
+header .image-text button:hover{
+  background-color: transparent;
+  color: white;
+  border: 2px ridge white;
+  border-radius: 0px;
 }

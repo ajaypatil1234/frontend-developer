@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            height: 100px;
+            width: 100px;
+            background-color: yellow;
+        }
+        .div1 {
+        height: 100px;
+        width: 100px;
+        transition: all 2s ease;
+       }
+      .div1:hover {
+        width: 200px;
+        background-color: tomato;
+      }
+      .div2{
+        transition: all 2s ease-in;
+        background-color: blue;
+      }
+      .div2:hover{
+        background-color: brown;
+        width: 200px;
+      }
+      .div3{
+        background-color: slateblue;
+        transition: all 2s ease-out;
+      }
+      .div3:hover{
+        background-color: tan;
+        width: 200px;
+      }
+      .div4{
+         background-color: saddlebrown;
+         transition: all 2s ease-in-out ;
+      }
+      .div4:hover{
+        background-color: lawngreen;
+        width: 200px;
+      }
+      .div5{
+        background-color: dimgrey;
+        transition: all 2s linear;
+      }
+      .div5:hover{
+         background-color: violet;
+         width: 200px;
+      }
+    </style>
+</head>
+<body>
+    <div class="div1"></div> <br>
+    <div class="div2"></div> <br>
+    <div class="div3"></div> <br>
+    <div class="div4"></div> <br>
+    <div class="div5"></div>
+</body>
+</html>
