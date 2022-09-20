@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .div1{
+            height: 150px;
+            width: 150px;
+            background-color:slategray;
+            border: 2px solid black;
+            margin: 200px auto;
+            transition: 1s all ease;
+        }
+        .div1:hover{
+            /* set value in 0 to 360deg */
+        /* if we set 1 value in skew it auto understand for both axis */
+        /* transform: skew(20deg,30deg); */
+        /* transform: skewx(20deg); */
+        transform: skewy(-30deg);
+        }
+            </style>
+</head>
+<body>
+    <div class="div1">skew effect</div>
+</body>
+</html>
