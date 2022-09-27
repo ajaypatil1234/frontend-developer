@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    img{
+       height: 400px;
+       width: 400px;
+       position: relative;
+        /* set value in px */
+        filter: blur(1px);
+        /* set value in % */
+        filter: brightness(10%);
+        filter: contrast(50%);
+        /* for the png image */
+        filter: drop-shadow(10px 10px 10px black);
+        filter: grayscale(50%);
+        filter: hue-rotate(50deg);
+        filter: invert(50%);
+        filter: opacity(30%);
+        filter: saturate(50%);
+        filter: sepia(40%);
+    }
+    .text{
+      position: absolute;
+      top: 100px;
+      color: white;
+      font-size: 20px;
+      padding: 40px;
+      margin: 50px ;
+      word-spacing: 20px;
+      text-shadow: 5px 10px 5px black;
+    }
+  </style>
+</head>
+<body>
+   <img src="63_images/wall2.jpeg" alt="">
+   <div class="text">
+    <h3>HELLO WORLD</h3>
+   </div>
+</body>
+</html>

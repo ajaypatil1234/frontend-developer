@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            height: 200px;
+            width: 300px;
+            margin: 200px auto;
+            border: 2px solid black;
+            padding: 20px;
+        }
+        p::first-letter{
+            color: red;
+            font-size: 20px;
+        }
+        p::first-line {
+            color: blue;
+        }
+        p::before {
+            content: "Ajay";
+        }
+        p::after {
+            content: "hello world ";
+        }
+        p::selection {
+            color: white;
+            background-color: black;
+        }
+        p::marker{
+            color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maiores ad aliquam harum fugiat totam ex temporibus adipisci suscipit 
+            omnis tenetur alias in ipsum iusto atque corporis, vel voluptatem? Unde, expedita?
+        </p>
+    </div>
+</body>
+</html>
