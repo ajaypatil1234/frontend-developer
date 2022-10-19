@@ -1,0 +1,9 @@
+    
+    
+      <!-- keywords means reserve word 
+
+var
+document
+write() - functions
+
+-->
