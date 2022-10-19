@@ -1,0 +1,42 @@
+
+
+ condtional statement   ->
+
+    (1) If  statement
+        (a) If... else statement
+        (b) If ...else if..else statement
+        (c) nested If
+
+    (2) switch  stament
+
+        {} -> indicate a block
+
+             if(condition){
+                        statements
+                    }else{
+                        statements
+                                }
+
+
+
+             if(condition-1){
+
+            }else if(condition-2){
+
+            }else if(condition-3){
+
+            }else{
+
+                }
+            
+            Switch case -:
+
+                switch(variable_name){
+                case 1:
+
+                case 2:
+                    ....
+                case N:
+                default:
+                            }
+    
