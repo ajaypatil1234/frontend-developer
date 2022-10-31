@@ -1,0 +1,32 @@
+    
+        function??
+
+        to every langauge there a two type of function.
+
+        (1) pre-define/built-in
+
+        for ex,  write(), writeln(), getelementBYID()
+
+        (2)user-define
+
+        advantage of function -> reduce time    
+        not needed  to re-write a code .
+
+        syntax :
+        function function_name() {
+        statement
+        }
+    
+        Event?
+
+        to perform task.
+
+        Event handler?
+             to handler an event.
+
+        visite website -> javapoint,tutorialpoint
+
+        there  are 3 type popupboxes
+        (1) alert()-also function_name
+        (2)CONFORM()
+        (3)PROmpt 
