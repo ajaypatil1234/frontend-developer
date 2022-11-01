@@ -1,0 +1,179 @@
+@media (min-width: 768px) {
+    header{
+        background-color: blue;
+        height: 200px;
+        width: 100%;
+    }
+    .container {
+        margin-left: 0px;
+        margin-right: 0px;
+      }
+    header .back-image{
+    background-image: url(image/homeimage.jpg);
+    height: 500px;
+    width: 100%;
+    background-size: cover;
+    position: relative;
+    background-position: center;
+    background-position: center;
+    }
+    header .back-image .info{
+        color: white;
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+    header .back-image .info .info-left{
+      width: 100%;
+    }
+    header .back-image .info.info-left {
+    width: 100%;
+    display: flex;
+    }
+    header .back-image .info .info-right {
+        width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 400px;
+    flex-direction: row;
+}
+header .back-image .menu{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+}
+header .back-image .menu .logo {
+    width: 100%;
+    font-size: 50px;
+    padding: 20px;
+}
+header .back-image .menu .nav {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+header .back-image .menu .nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+header .back-image .menu .nav ul li {
+    font-size: 20px;
+}
+header .banner{
+    position: absolute;
+    top: 300px;
+    color: white;
+  }
+  header .banner .big-head{
+    font-size: 0.5in;
+    padding-bottom: 20px;
+  }
+  header .banner .small-head{
+    font-size: 0.2in;
+    font-family:"Roboto", sans-serif;
+    letter-spacing: 2PX;
+    padding-bottom: 30px;
+    font-weight: 100;
+  }
+  .image{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    margin-left: 20px;
+  }
+.image img{
+    height: 250px;
+    width: 250px;
+    padding: 10px;
+  }
+  .ser-info{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+  }
+  .chef-info .chef-detail{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .chef-info .chef-pic img{
+    height: 500px;
+    width: 500px;
+  }
+  .special_menu ul li { 
+    display: inline-block;  
+    padding: 40px;
+    font-size: 15px;
+  }
+  
+  .special_menu .main-sp-menu {
+    border: 2px solid gray;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 30px;
+  }
+    
+  .choose .choose-left{
+    width: 100%;
+  }
+  .choose .choose-left h2{
+    font-size: 0.5in;
+    padding: 50px;
+    text-align: center;
+}
+
+  .choose .choose-right{
+    width: 100%;
+    display: grid;
+    grid-template-columns:repeat(1,1fr);
+    text-align: center;
+  }
+  .gallery .gallery-img{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    align-items: center;
+    gap: 20px;  
+}
+.book-img{
+  background-image: url(image/banner2.jpg);
+  height: 550px;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+}
+.book {
+  height: 650px;
+}
+.book form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.book form .form-time,
+.form-date,
+.form-select {
+  margin: 10px;
+}
+.book .book-info {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+.book .book-info .btnclick {
+  margin-top: 30px;
+}
+.book .book-info button {
+  height: 40px;
+  width: 183px;      
+      }
+      .comment .cust-review {
+        padding-top: 50px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+}
