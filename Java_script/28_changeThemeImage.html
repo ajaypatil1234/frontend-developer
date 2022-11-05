@@ -1,0 +1,38 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width= , initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            img{
+                height: 100px;
+                width: 100px;
+            }
+            .dark-mode{
+                background-color: black;
+                color: white;
+            }
+        </style>
+    </head>
+    <body id="b1">
+        <img src="28_image/moon.png" alt="" id="moon">
+
+        <script>
+            let icon=document.getElementById("moon")
+            let bodypage=document.getElementById("b1")
+
+            icon.addEventListener("click",function(){
+                bodypage.classList.toggle("dark-mode");
+
+                if(bodypage.classList.contains("dark-mode")==true){
+                    icon.src="28_image/sun.png";
+                }else{
+                    icon.src="28_image/moon.png";
+                }
+
+            })
+        </script>
+    </body>
+    </html>
