@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- jquery cdn -->
+    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+    <!-- owl carousel css cdn -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+    />
+    <!-- owl carousel js cdn -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.js"></script>
+    <script>
+        $(function () {
+          $(".owl-carousel").owlCarousel({
+            loop: true,
+            margin: 30,
+            nav: false,
+            dots: false,
+            autoplay: true,
+            autoplayTimeout: 1000,
+            responsive: {
+              0: {
+                items: 1,
+              },
+              768: {
+                items: 3,
+              },
+              992: {
+                items: 4,
+              },
+              1200: {
+                items: 5,
+              },
+            },
+          });
+        });
+      </script>
+      <style>
+        img{
+            height: 250px;
+        width: 250px;
+        }
+      </style>
+</head>
+<body>
+    <div class="owl-carousel owl-theme">
+        <div class="iteam">
+            <img src="10_image/img1.jpg" alt="">
+        </div>
+        <div class="iteam">
+            <img src="10_image/img1.jpg" alt="">
+        </div>        <div class="iteam">
+            <img src="10_image/img2.jpg" alt="">
+        </div>        <div class="iteam">
+            <img src="10_image/img3.jpg" alt="">
+        </div>        <div class="iteam">
+            <img src="10_image/img4.jpg" alt="">
+        </div>        <div class="iteam">
+            <img src="10_image/img5.jpg" alt="">
+        </div>
+
+        </div>
+    </body>
+
+</html>
