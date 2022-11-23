@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <title>counting</title>
+    </head>
+<body>
+        <div id="counter"></div>
+
+        <script>
+            let counts = setInterval( updated,30);
+            let c=900;
+             function  updated() {
+                var count = document.getElementById("counter");
+                count.innerHTML= ++c;
+                if (c == 1000){
+                    clearInterval(counts);
+                }
+             }
+        </script>
+</body>
+</html>
+
