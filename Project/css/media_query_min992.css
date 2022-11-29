@@ -1,0 +1,214 @@
+@media (min-width: 992px) {
+    header{
+        background-color: blue;
+        height: 200px;
+        width: 100%;
+    }
+    .container {
+        margin-left: 0px;
+        margin-right: 0px;
+      }
+      header .back-image{
+        background-image: url(image/homeimage.jpg);
+        height: 650px;
+        width: 100%;
+        background-size: cover;
+        position: relative;
+        background-position: center;
+        background-position: center;
+        }
+      header .info{
+        color: white;
+        display: flex;
+        width: 100%;
+        }
+        header .back-image .nav-content{
+        height: 200px;
+        background-color: transparent;
+        }
+        header .back-image .info .info-left{
+          width: 50%;
+        }
+        header .back-image .info.info-left {
+        width: 50%;
+        display: flex;
+        }
+        header .back-image .info .info-right {
+        width: 50%;
+        display: flex;
+        justify-content: flex-end;
+        margin-top: -33px;
+        }
+        header .back-image .menu{
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+            justify-content: center;
+        }
+        header .back-image .menu .logo {
+            width: 100%;
+            font-size: 75px;
+            padding: 20px;
+        }
+        header .back-image .menu .nav {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+        }
+        header .back-image .menu .nav ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+          }
+        header .back-image .menu .nav ul li {
+            font-size: 25px;
+        }
+        header .banner{
+            position: absolute;
+            top: 300px;
+            color: white;
+          }
+          header .banner .big-head{
+            font-size: 0.5in;
+            padding-bottom: 20px;
+          }
+          header .banner .small-head{
+            font-size: 0.2in;
+            font-family:"Roboto", sans-serif;
+            letter-spacing: 2PX;
+            padding-bottom: 30px;
+            font-weight: 100;
+          }
+          .section{
+            display: flex;
+            width: 100%;
+            flex-direction:column ;
+          }
+          .section .text-hed{
+            padding: 0px;
+            width: 100%;
+          }
+          .section .text-con{
+            padding: 0px;
+            width: 100%;
+          }
+          .section .text-con p{
+            padding: 6px;
+            color: gray;
+            letter-spacing: 1px;
+            word-spacing: 1px;
+          }
+          .section .text-hed h1{
+            font-size: 0.5in;
+             padding: 50px;
+             color:rgb(46, 44, 44);
+              }
+              .image{
+                display: grid;
+                grid-template-columns: repeat(2,1fr);
+                margin-left: 20px;
+              }
+            .image img{
+                height: 300px;
+                width: 300px;
+                padding: 10px;
+              }
+              .ser-info{
+                display: grid;
+                grid-template-columns: repeat(3,1fr);
+              }
+              .chef-info .chef-detail{
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+              }
+              .chef-info .chef-pic img{
+                height: 500px;
+                width: 500px;
+              }
+              .chef-info .chef-detail p{
+                color: #999;
+                width: 100%;
+                font-weight: 300;
+              }
+              .special_menu ul li { 
+                display: inline-block;  
+                padding: 40px;
+                font-size: 25px;
+              }
+              
+              .special_menu .main-sp-menu {
+                border: 2px solid gray;
+                padding: 20px;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+              }
+              .choose{
+                padding: 20px;
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+              }
+              .choose .choose-left{
+                width: 40%;
+              }
+              .choose .choose-left h2{
+                font-size: 0.5in;
+                padding: 50px;
+                text-align: center;
+            }      
+              .choose .choose-right{
+                width: 60%;
+                display: grid;
+                grid-template-columns:repeat(2,1fr);
+              }
+              .gallery {
+                padding: 20px;
+              }
+              .gallery .gallery-img {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+              }
+              book-img{
+                background-image: url(image/banner2.jpg);
+                height: 550px;
+                width: 100%;
+                background-size: cover;
+                background-position: center;
+              }
+              .book {
+                height: 650px;
+              }
+              .book form {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+              }
+              .book form .form-time,
+              .form-date,
+              .form-select {
+                margin: 10px;
+              }
+              .book .book-info {
+                display: flex;
+                flex-direction: column;
+                padding: 0;
+              }
+              .book .book-info .btnclick {
+                margin-top: 30px;
+                margin-left: 300px;
+              }
+              .book .book-info button {
+                height: 40px;
+                width: 256px;      
+                    }
+                    .comment .cust-review {
+                      padding-top: 50px;
+                      display: grid;
+                      grid-template-columns: repeat(3, 1fr);
+                      gap: 20px;
+                    }
+                  }              
