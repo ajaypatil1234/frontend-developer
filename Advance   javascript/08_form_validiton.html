@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span{
+            color: red;
+        }
+    </style>
+
+    <script>
+         function check_validation() {
+            
+           let fn = document.getElementById("fname").value;
+           if( fn == "") {
+               document.getElementById("fmsg").innerHTML=" * Enter First name";
+               return false;
+           } 
+
+           let male = document.getElementById("male").checked;
+           let female = document.getElementById("female").checked;
+
+           if (male == false  && female == false) {
+             document.getElementById("gmsg").innerHTML= " * select Gender"
+             return false;
+           }
+                let c1 = document.getElementById("c1").checked;
+                let c2 = document.getElementById("c2").checked;
+                let c3 = document.getElementById("c3").checked;
+                if (c1 == false && c2 == false && c3 == false) {
+                document.getElementById("cmsg").innerHTML = " * Select subjects";
+                return false;
+                }
+
+                let city = document.getElementById("city").value;
+                 if ( city == -1) {
+                    document.getElementById("cimsg").innerHTML = " * select city"
+                    return false;
+                 }
+
+            }
+    </script>
+
+</head>
+<body>
+       <form action="">
+                <label for="">Name :</label>
+                <input type="text" name="fn" id="fname">
+                <span id="fmsg"></span>
+                <br><br>
+
+                <label for="">Gender :</label>
+                <input type="radio" name="gen" id="male"/> male
+                <input type="radio" name="gen" id="female"/> Female
+                <span id="gmsg"></span>
+                 <br> <br>
+                
+
+             
+                 <label for="">Subjects </label>
+                 <input type="checkbox" name="c1" id="c1" />HTML
+                <input type="checkbox" name="c2" id="c2" />CSS
+                 <input type="checkbox" name="c3" id="c3" />JS
+                 <span id="cmsg"></span>
+                 <br /><br />
+
+                     <label for="">City</label>
+                    <select name="" id="city">
+                    <option value="-1">---select---</option>
+                    <option value="">Surat</option>
+                    <option value="">Baroda</option>
+                      </select>
+                      <span id="cimsg"></span>
+                    <br /><br />
+
+                  <input type="submit" value="click here" onclick=" return check_validation()">
+                
+
+                    
+
+            </form>
+</body>
+</html>

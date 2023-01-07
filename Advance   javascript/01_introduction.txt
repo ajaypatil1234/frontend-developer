@@ -1,0 +1,21 @@
+
+         javascript is  scripting langauge 
+
+         also known as object based scripting language.
+
+        started year -> 1995
+         who'es develope  -> netscape  browser 
+
+         (1) this is client  side scripting langauge.
+         (2) loosey datatype.
+         (3) not need to datatype declaration.
+         (4) used to make validation.
+        (5) used  to make website interactive.
+
+
+        object ??
+         it  is physical and logical  items,
+
+          datatypes, variables ,keyword , event ,  function , event handler, selectors , conditional  statement   
+        
+    

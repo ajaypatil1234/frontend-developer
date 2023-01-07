@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      span {
+        color: red;
+      }
+    </style>
+    <script>
+      function form_valid() {
+        // let fn = document.form1.fname.value; -> form through or name through get value
+        let fn = document.getElementById("fname").value;
+        let email = document.getElementById("email").value;
+        let reg = /^[a-z][A-Z]*$/i;
+        let num = /^[0-9]*$/i;
+        let mail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        // if (fn == "") {
+        //   document.getElementById("msg").innerHTML = "enter name";
+        //   return false;
+        // } else if (reg.test(fn)) {
+        //   return true;
+        // } else {
+        //   document.getElementById("msg").innerHTML = "please enter alphabets";
+        //   return false;
+        // }
+        
+        if (email == "") {
+          alert("enter email");
+        } else if (mail.test(email)) {
+          return true;
+        } else {
+          alert("enter proper email id");
+          return false;
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <form action="" method="post" name="form1">
+      <table border="1">
+        <tr>
+          <td>First name</td>
+          <td>
+            <input type="text" name="fname" id="fname" />
+            <span id="msg"></span>
+          </td>
+        </tr>
+        <tr>
+          <td>Email</td>
+          <td><input type="text" name="" id="email" /></td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input type="submit" onclick="return form_valid()" />
+          </td>
+        </tr>
+      </table>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+      <style>
+         span{
+          color:  red;
+         }
+      </style>
+
+    <script>
+        function name_check() {
+            let fname = document.getElementById("fname").value;
+            if (fname == "") {
+               document.getElementById("fmsg").innerHTML=" * Enter name"
+               return false 
+            }
+        }
+
+        function fname_msg() {
+            let fname = document.getElementById("fname").value;
+           if (fname.match(/^[0-9]*/)) {
+                document.getElementById("fmsg").innerHTML ="Number not allowd"
+                return false
+              }
+        }
+    </script>
+</head>
+<body>
+    <table>
+        <tr>
+          <td>Name</td>
+          <td>
+            <input type="text" name="" id="fname" onchange="return fname_msg()" />
+            <span id="fmsg"></span>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input type="submit" name="" id="" onclick="return name_check()" />
+          </td>
+        </tr>
+      </table>
+</body>
+</html>
