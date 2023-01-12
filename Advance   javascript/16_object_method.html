@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //  assign () -> method can not replace value 4
+
+        let obj1 = {
+            a:34,
+            b:23,
+            c:21,
+        };
+        let obj2 = Object.assign({c:22,d:23},obj1);
+        console.log(obj1.c, obj2.c);
+        console.log(obj2.c);
+
+        function func1(){
+            this.fruit_name = "Mango";
+        }
+        function func2(){
+            func1.call(this);
+        }
+
+        func2.prototype =Object.create(func1.prototype);
+        const m = new func2();
+        console.log(m.fruit_name);
+
+        const obj3 = {
+            1:"abc",
+            2:"xyz",
+            3:"tops technologies"
+        }
+
+        console.log(Object.entries(obj3[3]))
+
+
+        const f1 = {
+            1 : "new data"
+        }
+        const f2 = Object.freeze(f1);
+        f2.prototype = "new data are assign";
+        console.log(f2)
+
+
+
+        
+
+
+    </script>
+</body>
+</html>

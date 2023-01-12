@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        number 1 : <input type="text" name="" id="n1"> <br><br>
+        number 2 : <input type="text" name="" id="n2"> <br><br>
+        <button onclick="return add_value()">Add</button>
+        <button onclick="return sub_value()">subtract</button>
+        <span id="msg1"></span>
+    </form>
+
+    <script>
+    let a = 10;
+        let b = 10;
+        // document.write(a+b + "<br>" + (a+b))
+        function add_value(){
+            let n1 = document.getElementById("n1").value;
+            let n2 = document.getElementById("n2").value;
+
+            let addition = Number.parseInt(n1)+Number.parseInt(n2);
+            document.getElementById("msg1").innerHTML = addition
+            return false;
+        }
+
+        function sub_value(){
+            let n1 = document.getElementById("n1").value;
+            let n2 = document.getElementById("n2").value;
+
+            let addition = n1-n2;
+            document.getElementById("msg1").innerHTML = addition
+            return false;
+        }
+
+        
+        let num = 20;
+        let num1 = "abc"
+        console.log(isFinite(num));
+        console.log(Number.isInteger(10.10));
+        console.log(isNaN(num));
+
+            
+
+    </script>
+</body>
+</html>

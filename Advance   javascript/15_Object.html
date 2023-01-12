@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var obj1 = {
+        // key : value // property :value
+        brands: "abc",
+        price: 50000,
+        size: "medium",
+      };
+      console.log(obj1);
+
+      //   for in loop
+      //   for in loop used with always in object
+      for (let x in obj1) {
+        console.log(x + "=>" + obj1[x]);
+      }
+
+      var obj2 = {
+        a: 2,
+        b: 3,
+        c: 4,
+      };
+      console.log(obj2.a);
+      console.log(obj2.b);
+      console.log(obj2.c);
+    
+      console.log(Object.assign(obj2.a, 5));
+      console.log(Object.assign(obj2.b, 50));
+
+      //   this ->  is a reference variable
+
+      var person = {
+        name: "null",
+        details: function () {
+          console.log("hi");
+          console.log("name is ${this.name}");
+        },
+      };
+      console.log(person);
+      console.log(Object.create(person));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // array is a name of variable which is store similar type of data.
+
+      var name_1 = "abc";
+      console.log(name);
+
+      var name_1 = ["abc", "xyz", "pqr", 1];
+      console.log(name);
+      //   for of loop
+      //   always used with array
+      for (let x of name_1) {
+        console.log(x);
+      }
+
+      var fruits_1 = ["papaya", "grapes", "bananas"];
+      for (let f of fruits_1) {
+        console.log(f);
+        document.writeln(f);
+      }
+      console.log("---------");
+      var fruits_2 = ["watermalon", "kiwi", "apples"];
+      for (let f1 of fruits_2) {
+        console.log(f1);
+        document.writeln(f1);
+      }
+
+      //   concat method -> join 2 arrays
+      console.log(fruits_1.concat(fruits_2));
+      //   push method -> add values
+      console.log(fruits_1.push("orange"));
+      console.log(fruits_1);
+      //   pop -> remove value
+      console.log(fruits_1.pop());
+      console.log(fruits_1);
+
+      //   to copy an array.
+      console.log(fruits_1.copyWithin(fruits_2));
+
+      //   original array
+      console.log(fruits_2);
+    </script>
+  </body>
+</html>
