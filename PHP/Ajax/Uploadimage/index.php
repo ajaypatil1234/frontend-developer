@@ -19,22 +19,56 @@ if (isset($_POST['action']) && $_POST['action'] == 'addUser') {
     $firstName = $_POST['firstName'] ?? '';
     $lastName = $_POST['lastName'] ?? '';
     $email = $_POST['email'] ?? '';
-    $image = $_FILES['image']['name'] ?? '';
-    $target = "uploads/" . basename($image);
+    
+    // File upload validations
+    $image = $_FILES['image'] ?? null;
+    // $valid_extensions = ['jpg', 'jpeg'];
+    // $valid_extensions = ['png'];
+    $valid_extensions = ['jpg', 'jpeg' , 'png'];
+    //   $valid_extensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp'];
 
-    $stmt = $conn->prepare("INSERT INTO user (firstName, lastName, email, image) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $firstName, $lastName, $email, $image);
-
-    if ($stmt->execute()) {
-        if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
-            $response = array('status' => 'success', 'message' => 'User added successfully with image.');
+    $max_size = 2 * 1024 * 1024; // 2MB in bytes
+    
+    if ($image && $image['error'] === UPLOAD_ERR_OK) {
+        $file_name = $image['name'];
+        $file_tmp = $image['tmp_name'];
+        $file_size = $image['size'];
+        
+        // Validate file extension
+        $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+        if (!in_array($file_ext, $valid_extensions)) {
+            $response = array('status' => 'error', 'message' => 'Only JPG and PNG images are allowed.');
+            echo json_encode($response);
+            exit();
+        }
+        
+        // Validate file size
+        if ($file_size > $max_size) {
+            $response = array('status' => 'error', 'message' => 'File size exceeds 2MB limit.');
+            echo json_encode($response);
+            exit();
+        }
+        
+        // Move uploaded file to target directory
+        $target = "uploads/" . basename($file_name);
+        if (move_uploaded_file($file_tmp, $target)) {
+            // Insert user into database
+            $stmt = $conn->prepare("INSERT INTO user (firstName, lastName, email, image) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("ssss", $firstName, $lastName, $email, $file_name);
+            
+            if ($stmt->execute()) {
+                $response = array('status' => 'success', 'message' => 'User added successfully with image.');
+            } else {
+                $response = array('status' => 'error', 'message' => 'Error adding user: ' . $stmt->error);
+            }
+            $stmt->close();
         } else {
-            $response = array('status' => 'error', 'message' => 'User added successfully, but image upload failed.');
+            $response = array('status' => 'error', 'message' => 'Failed to upload image.');
         }
     } else {
-        $response = array('status' => 'error', 'message' => 'Error adding user: ' . $stmt->error);
+        $response = array('status' => 'error', 'message' => 'Image upload failed or no image selected.');
     }
-    $stmt->close();
+    
     echo json_encode($response);
     exit();
 }
@@ -78,8 +112,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'updateUser') {
     $firstName = $_POST['firstName'] ?? '';
     $lastName = $_POST['lastName'] ?? '';
     $email = $_POST['email'] ?? '';
-    $image = $_FILES['image']['name'] ?? '';
-    $target = "uploads/" . basename($image);
+    $newImage = $_FILES['image'] ?? null;
 
     $stmtFetch = $conn->prepare("SELECT image FROM user WHERE id=?");
     $stmtFetch->bind_param("i", $id);
@@ -90,24 +123,57 @@ if (isset($_POST['action']) && $_POST['action'] == 'updateUser') {
         $row = $resultFetch->fetch_assoc();
         $currentImage = $row['image'];
 
-        if (!empty($image)) {
-            // New image uploaded, update with image
-            $stmt = $conn->prepare("UPDATE user SET firstName=?, lastName=?, email=?, image=? WHERE id=?");
-            $stmt->bind_param("ssssi", $firstName, $lastName, $email, $image, $id);
+        if ($newImage && $newImage['error'] === UPLOAD_ERR_OK) {
+            // New image uploaded, validate and check if it is identical to the current image
+            $valid_extensions = ['jpg', 'jpeg'];
+            $max_size = 2 * 1024 * 1024; // 2MB in bytes
 
-            if ($stmt->execute()) {
-                // Move uploaded file to target directory
-                if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
-                    // Remove old image if exists
-                    if (!empty($currentImage) && file_exists("uploads/$currentImage")) {
-                        unlink("uploads/$currentImage");
-                    }
+            $file_name = $newImage['name'];
+            $file_tmp = $newImage['tmp_name'];
+            $file_size = $newImage['size'];
+            $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+
+            // Validate file extension
+            if (!in_array($file_ext, $valid_extensions)) {
+                $response = array('status' => 'error', 'message' => 'Only JPG images are allowed.');
+                echo json_encode($response);
+                exit();
+            }
+
+            // Validate file size
+            if ($file_size > $max_size) {
+                $response = array('status' => 'error', 'message' => 'File size exceeds 2MB limit.');
+                echo json_encode($response);
+                exit();
+            }
+
+            // Check if the new image is identical to the current image
+            if ($file_name === $currentImage && file_get_contents($file_tmp) === file_get_contents("uploads/$currentImage")) {
+                $response = array('status' => 'error', 'message' => 'New image is identical to the current image.');
+                echo json_encode($response);
+                exit();
+            }
+
+            // Move uploaded file to target directory
+            $target = "uploads/" . basename($file_name);
+            if (move_uploaded_file($file_tmp, $target)) {
+                // Remove old image if exists
+                if (!empty($currentImage) && file_exists("uploads/$currentImage")) {
+                    unlink("uploads/$currentImage");
+                }
+
+                // Update user with new image
+                $stmt = $conn->prepare("UPDATE user SET firstName=?, lastName=?, email=?, image=? WHERE id=?");
+                $stmt->bind_param("ssssi", $firstName, $lastName, $email, $file_name, $id);
+
+                if ($stmt->execute()) {
                     $response = array('status' => 'success', 'message' => 'User updated successfully with new image.');
                 } else {
-                    $response = array('status' => 'error', 'message' => 'Failed to upload image.');
+                    $response = array('status' => 'error', 'message' => 'Error updating user: ' . $stmt->error);
                 }
+                $stmt->close();
             } else {
-                $response = array('status' => 'error', 'message' => 'Error updating user: ' . $stmt->error);
+                $response = array('status' => 'error', 'message' => 'Failed to upload image.');
             }
         } else {
             // No new image, update without image
@@ -119,8 +185,8 @@ if (isset($_POST['action']) && $_POST['action'] == 'updateUser') {
             } else {
                 $response = array('status' => 'error', 'message' => 'Error updating user: ' . $stmt->error);
             }
+            $stmt->close();
         }
-        $stmt->close();
     } else {
         $response = array('status' => 'error', 'message' => 'User not found.');
     }
@@ -128,8 +194,6 @@ if (isset($_POST['action']) && $_POST['action'] == 'updateUser') {
     echo json_encode($response);
     exit();
 }
-
-
 
 // Fetch users for initial display
 $sql = "SELECT * FROM user ORDER BY id ASC";
@@ -140,7 +204,6 @@ if ($result->num_rows > 0) {
         $users[] = $row;
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -154,157 +217,157 @@ if ($result->num_rows > 0) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <style>
      /* General Styles */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    padding: 20px;
-}
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
 
-.alert {
-    margin-top: 10px;
-}
+        .alert {
+            margin-top: 10px;
+        }
 
-/* Table Styles */
-.table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    margin-top: 20px;
-}
+        /* Table Styles */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
 
-.table th, .table td {
-    border: 1px solid #ccc;
-    padding: 12px;
-    text-align: left;
-}
+        .table th, .table td {
+            border: 1px solid #ccc;
+            padding: 12px;
+            text-align: left;
+        }
 
-.table th {
-    background-color: #0d3866;
-    color: #fff;
-    font-weight: bold;
-    text-align:center;
-}
+        .table th {
+            background-color: #0d3866;
+            color: #fff;
+            font-weight: bold;
+            text-align:center;
+        }
 
-.table td {
-    background-color: #f9f9f9;
-    text-align: center;
-}
+        .table td {
+            background-color: #f9f9f9;
+            text-align: center;
+        }
 
-.table tbody tr:nth-child(even) {
-    background-color: #f0f0f0;
-}
+        .table tbody tr:nth-child(even) {
+            background-color: #f0f0f0;
+        }
 
-.table img {
-    height: 60px;
-    border-radius: 10%;
-    width: 75px;
-    object-fit: cover;
-}
+        .table img {
+            height: 60px;
+            border-radius: 10%;
+            width: 75px;
+            object-fit: cover;
+        }
 
-/* Button Styles */
-.btn {
-    cursor: pointer;
-    margin-right: 5px;
-}
+        /* Button Styles */
+        .btn {
+            cursor: pointer;
+            margin-right: 5px;
+        }
 
-.btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
-    color: #fff;
-}
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: #fff;
+        }
 
-.btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
-}
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
 
-.btn-warning {
-    background-color: #ffc107;
-    border-color: #ffc107;
-    color: #212529;
-}
+        .btn-warning {
+            background-color: #ffc107;
+            border-color: #ffc107;
+            color: #212529;
+        }
 
-.btn-warning:hover {
-    background-color: #e0a800;
-    border-color: #e0a800;
-    color: #212529;
-}
+        .btn-warning:hover {
+            background-color: #e0a800;
+            border-color: #e0a800;
+            color: #212529;
+        }
 
-.btn-danger {
-    background-color: #dc3545;
-    border-color: #dc3545;
-    color: #fff;
-}
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+            color: #fff;
+        }
 
-.btn-danger:hover {
-    background-color: #c82333;
-    border-color: #bd2130;
-    color: #fff;
-}
+        .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+            color: #fff;
+        }
 
-.btn-view {
-    background-color: #17a2b8;
-    border-color: #17a2b8;
-    color: #fff;
-}
+        .btn-view {
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+            color: #fff;
+        }
 
-.btn-view:hover {
-    background-color: #138496;
-    border-color: #117a8b;
-    color: #fff;
-}
-        /* Modal Content Styling */
-.modal-content {
-    background-color: #fff;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
+        .btn-view:hover {
+            background-color: #138496;
+            border-color: #117a8b;
+            color: #fff;
+        }
+                /* Modal Content Styling */
+        .modal-content {
+            background-color: #fff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
 
-.modal-header {
-    background-color: #2c709e;
-    color: #fff;
-    border-bottom: none;
-}
+        .modal-header {
+            background-color: #2c709e;
+            color: #fff;
+            border-bottom: none;
+        }
 
-.modal-title {
-    font-size: 1.25rem;
-}
+        .modal-title {
+            font-size: 1.25rem;
+        }
 
-.modal-body {
-    padding: 20px;
-}
+        .modal-body {
+            padding: 20px;
+        }
 
-/* User Details Styling */
-.user-details {
-    display: flex;
-    align-items: center;
-}
+        /* User Details Styling */
+        .user-details {
+            display: flex;
+            align-items: center;
+        }
 
-.user-avatar {
-    margin-right: 20px;
-}
+        .user-avatar {
+            margin-right: 20px;
+        }
 
-.user-avatar img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #007bff;
-}
+        .user-avatar img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #007bff;
+        }
 
-.user-info {
-    font-size: 1rem;
-}
+        .user-info {
+            font-size: 1rem;
+        }
 
-.user-info p {
-    margin-bottom: 10px;
-}
+        .user-info p {
+            margin-bottom: 10px;
+        }
 
-.user-info .label {
-    font-weight: bold;
-    margin-right: 5px;
-    color: #007bff;
-}
+        .user-info .label {
+            font-weight: bold;
+            margin-right: 5px;
+            color: #007bff;
+        }
 
     </style>
 </head>
@@ -466,6 +529,7 @@ body {
     </div>
 </div>
 
+
 <script>
 $(document).ready(function(){
 
@@ -490,10 +554,21 @@ $(document).ready(function(){
                     }, 1000);
                 } else {
                     $('#message').html('<div class="alert alert-danger">' + response.message + '</div>');
+                    setTimeout(function(){
+                        $('#message').empty(); // Clear message after 3 seconds
+                    }, 3000);
                 }
+                $('#addUserModal').modal('hide'); // Close modal on success or error
+                $('#addUserForm')[0].reset(); // Reset
             },
             error: function(xhr, status, error) {
                 console.error('Error adding user');
+                $('#message').html('<div class="alert alert-danger">Error adding user. Please try again later.</div>');
+                setTimeout(function(){
+                    $('#message').empty(); // Clear message after 3 seconds
+                }, 3000);
+                $('#addUserModal').modal('hide'); // Close modal on error
+                $('#addUserForm')[0].reset(); // Reset
             }
         });
     });
@@ -515,16 +590,23 @@ $(document).ready(function(){
                         }, 1000);
                     } else {
                         $('#message').html('<div class="alert alert-danger">' + response.message + '</div>');
+                        setTimeout(function(){
+                            $('#message').empty(); // Clear message after 3 seconds
+                        }, 3000);
                     }
                 },
                 error: function(xhr, status, error) {
                     console.error('Error deleting user');
+                    $('#message').html('<div class="alert alert-danger">Error deleting user. Please try again later.</div>');
+                    setTimeout(function(){
+                        $('#message').empty(); // Clear message after 3 seconds
+                    }, 3000);
                 }
             });
         }
     });
 
-   // Edit User - Populate form fields
+    // Edit User - Populate form fields
     $('.btnEdit').click(function(){
         var id = $(this).data('id');
         var firstName = $(this).data('firstname');
@@ -543,11 +625,42 @@ $(document).ready(function(){
     });
 
     // Update User - AJAX Form Submission
-    $('#editUserForm').submit(function(e){
+    $('#editUserForm').submit(function(e) {
         e.preventDefault();
+        
         var formData = new FormData(this);
         formData.append('action', 'updateUser');
 
+        var imageFile = $('#editNewImage')[0].files[0];
+        if (imageFile) {
+            var fileSize = imageFile.size; // in bytes
+            var validExtensions = ['jpg', 'jpeg'];
+            var fileExtension = imageFile.name.split('.').pop().toLowerCase();
+
+            // Validate file extension
+            if ($.inArray(fileExtension, validExtensions) == -1) {
+                $('#message').html('<div class="alert alert-danger">Only JPG images are allowed.</div>');
+                setTimeout(function(){
+                    $('#message').empty(); // Clear message after 3 seconds
+                }, 3000);
+                return;
+            }
+
+            // Validate file size
+            var maxSize = 2 * 1024 * 1024; // 2MB in bytes
+            if (fileSize > maxSize) {
+                $('#message').html('<div class="alert alert-danger">File size exceeds 2MB limit.</div>');
+                setTimeout(function(){
+                    $('#message').empty(); // Clear message after 3 seconds
+                }, 3000);
+                return;
+            }
+
+            // Append image file to FormData
+            formData.append('image', imageFile);
+        }
+
+        // AJAX call to update user
         $.ajax({
             url: 'index.php',
             type: 'POST',
@@ -556,6 +669,7 @@ $(document).ready(function(){
             processData: false,
             contentType: false,
             success: function(response) {
+                console.log('Response:', response);
                 if (response.status === 'success') {
                     $('#message').html('<div class="alert alert-success">' + response.message + '</div>');
                     setTimeout(function(){
@@ -563,15 +677,26 @@ $(document).ready(function(){
                     }, 1000);
                 } else {
                     $('#message').html('<div class="alert alert-danger">' + response.message + '</div>');
+                    setTimeout(function(){
+                        $('#message').empty(); // Clear message after 3 seconds
+                    }, 3000);
                 }
+                $('#editUserModal').modal('hide'); // Close modal on success or error
+                $('#editUserForm')[0].reset(); // Reset
             },
             error: function(xhr, status, error) {
-                console.error('Error updating user');
+                console.error('Error updating user:', error);
+                $('#message').html('<div class="alert alert-danger">Error updating user. Please try again later.</div>');
+                setTimeout(function(){
+                    $('#message').empty(); // Clear message after 3 seconds
+                }, 3000);
+                $('#editUserModal').modal('hide'); // Close modal on success or error
+                 $('#editUserForm')[0].reset(); /// Reset form
             }
         });
     });
 
-      // View User - Populate modal fields
+    // View User - Populate modal fields
     $('.btnView').click(function(){
         var firstName = $(this).data('firstname');
         var lastName = $(this).data('lastname');
@@ -584,9 +709,8 @@ $(document).ready(function(){
         $('#viewImage').attr('src', 'uploads/' + image); // Display image in modal
     });
 
-
-
 });
+
 </script>
 
 </body>
