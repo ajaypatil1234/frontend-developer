@@ -1,0 +1,124 @@
+insert and insertId
+
+$data = array('name'=>$request->name,
+	      'email'=>$request->email)
+
+
+$result = DB::table('students')->insert($data); // store in db
+$result = DB::table('students')->insertId($data); // get the inserted id
+************************************************************************************
+
+get , where, orWhere, whereBetween , orWhere(function($query))
+1) get
+   $result = DB::table('students')->get();
+   where
+2) $result = DB::table('students')->where('id', $id)->get();
+   orWhere	
+3) $result = DB::table('students')->where('id', $id)->orWhere('name', 'sandip')->get(); its means get id or where name is sandip
+   whereBetween 	
+4) $result = DB::table('students')->whereBetween('id', ['2, 4'])->get();  // here we pass the range 2 , 4 we get the dta 2, 3, 4 
+   whereNotBetween 
+5) $result = DB::table('students')->whereNotBetween ('id', ['2, 4'])->get(); // those user get the data there id not been 2, 3, 4
+   whereIn
+6) $result = DB::table('students')->whereIn('id', ['2, 4,6,8'])->get(); // here we get only the 2, ,4 ,6 8 user data
+   orWhere(function($query))	
+7) $result = DB::table('students')->where('name', 'sandip')
+			        orWhere(function($query){
+				 $query->where('name', 'test')
+				       ->where('id','<' , 2)		
+				)->get(); 
+ 				// here we get the data where name is 'sandip', or where there name is test and there id is less < 2
+
+************************************************************************************
+first() , find() , value(),
+
+1) first()  when we want to get only perticular dta
+   $result = DB::table('students')-where('id', $id)->first(); its get only first data
+   find()
+2) $result = DB::table('students')->find($id); // in the find query we dont need add a where
+   value
+3) $result = DB::table('students')->where('id', 4)->value('email');
+   
+
+************************************************************************************   
+pluck ()
+1) $result = DB::table('students')-pluck('email'); here return all the data in array form
+
+
+************************************************************************************   
+1) Select ,Addselect 
+   $result = DB::table('students')->select('name', 'email')->get(); 
+   addSelect
+2) $students= DB::table('students')->select('name', 'email'); 
+   $result = $students->addSelect('phone')->get();  // here we add one more column to get the data
+
+************************************************************************************
+updateOrInser
+upsert
+
+************************************************************************************
+orderBy, groupBy,
+1) orderBy
+   $result = DB::table('students')->orderBy('name','asc')->get();
+2) groupBy
+   $result = DB::table('students')->select('email')->groupBy('email)->get(); here selcet the group column and make all records as group ans show only one tme value
+3) offest and limit
+   $result = DB::table('students')->offest(2)->limit(5)->get();
+				   here a offeset is skipp first two record or row and get the limit of 5 rows
+                                   means 3,4,5,6,7
+************************************************************************************
+union == is use to combine two querry
+
+   $student1 = DB::table('students')->where('id',2);
+   $students2= DB::table('students')->where('name','Harish')->union(student)->get();
+	here we get the student where id is 1 and also get where studens name = 'harish' its get the data both
+************************************************************************************
+ chunk  its provide a one time limit and get record there limititon and next data get next iterate
+  in the chuck method be must use a orderBy its compulasry
+
+  $results = DB::tabl('students')->orderBy('id')->chunk(5 , function ($users){
+		foreach($users as $user){
+			 echo user->name;
+		}	
+	}) 
+ 
+
+************************************************************************************
+exist or dosentExist()
+if(DB::table('students')->where('name','test1')->exist()){
+	echo "exitst";
+}
+
+
+ dosentExist()
+if(DB::table('students')->where('name','test1')-dosentExist()){
+	echo "dosentExist"
+}
+
+************************************************************************************
+paginate and simplePaginate method
+
+ $students = DB::table('students')->paginate(2);
+ 
+and use is {{ $students->links()}}
+
+************************************************************************************
+Laravel join
+join
+ $result = DB::table('students')
+		->join('results', 'students.id' ,'=', 'result.students_id' )->get();  only get the data where both table meet the id
+
+leftJoin
+ $result = DB::table('students')
+		-leftJoin('results', 'students.id' ,'=', 'result.students_id' )->get(); here we get here left data all and also get the data in result table where id is get
+
+ 
+rightJoin
+ $result = DB::table('students')
+		-rightJoin('results', 'students.id' ,'=', 'result.students_id' )->get(); here we get the all the right tabla and get left table match data
+
+crossJoin 
+ $result = DB::table('students')
+		-crossJoin('results' )->get(); here  we get the all records  means if we have student table 9 record and result table 5 record we get = 45 row 
+						because here first one record in first table is link to second table every row and pass the data 
+
